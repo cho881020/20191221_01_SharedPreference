@@ -14,6 +14,8 @@ class ContextUtil {
         //    사용자의 ID를 (저장-set/로드-get) 할때 사용하는 항목의 이름을 상수로 저장.
         val USER_ID = "USER_ID"
 
+        val USER_ID_SAVE = "USER_ID_SAVE"
+
         //    userId를 저장하는 기능을 구현한 함수
         fun setUserId(context: Context, inputId: String) {
 //        메모장에서 txt파일을 여는것과 같은 행위
@@ -30,6 +32,18 @@ class ContextUtil {
 
             return pref.getString(USER_ID, "")!!
         }
+
+        fun setUserIdSave(context: Context, needSave:Boolean) {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            pref.edit().putBoolean(USER_ID_SAVE, needSave).apply()
+        }
+
+        fun getUserIdSave(context: Context) : Boolean {
+            val pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE)
+            return pref.getBoolean(USER_ID_SAVE, false)
+        }
+
+
     }
 
 
